@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import Services from "./Services";
 import path from "path";
-import Router from "./Router"; 
+import router from "./Router/routes";
 import bodyParser from "body-parser";
 
 
@@ -22,10 +22,7 @@ server.get('/', (req, res) => {
     res.send("ok");
 });
 
-server.use('/create',Router.create_container); 
-server.use('/start', Router.start_container);
-server.use('/stop', Router.stop_container);
-server.use('/delete', Router.delete_container);
+server.use("/", router);
 
 const port = process.env.PORT || 81;
 

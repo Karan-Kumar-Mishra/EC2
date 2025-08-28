@@ -1,16 +1,16 @@
 import express, { Request, Response } from "express"
 import Services from "../Services";
 
-const creat_container = express.Router();
 
-export default creat_container.post('/', (req: Request, res: Response) => {
 
-    // if (!req.body.vm_name || req.body.username || req.body.password) {
-    //   res.json({
-    //           status:"error",
-    //           message:"Invaild json!"
-    //     })
-    // }
+export default function creat_container(req: Request, res: Response) {
+
+    if (!req.body.vm_name || req.body.username || req.body.password) {
+        res.json({
+            status: "error",
+            message: "Invaild json!"
+        })
+    }
 
     const new_container = {
         user_id: req.body.user_id,
@@ -42,4 +42,4 @@ export default creat_container.post('/', (req: Request, res: Response) => {
             });
         });
 
-}) 
+}
