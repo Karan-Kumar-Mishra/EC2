@@ -1,11 +1,8 @@
 import express, { Request, Response } from "express"
 import Services from "../Services";
-
-
-
 export default function creat_container(req: Request, res: Response) {
 
-    if (!req.body.vm_name || req.body.username || req.body.password) {
+    if (!req.body.container_name || ! req.body.image_name) {
         res.json({
             status: "error",
             message: "Invaild json!"
@@ -14,10 +11,8 @@ export default function creat_container(req: Request, res: Response) {
 
     const new_container = {
         user_id: req.body.user_id,
-        name: req.body.vm_name,
-        username: req.body.vm_username,
-        password: req.body.vm_password,
-        ports: req.body.vm_ports
+        name: req.body.container_name,
+        image:req.body.image_name
     }
 
     Services.create_container(new_container)
@@ -25,17 +20,13 @@ export default function creat_container(req: Request, res: Response) {
             return await Services.start_container(req.body.user_id, id).then(() => id);
         })
         .then((id) => {
-
             res.send({
                 status: "ok",
                 vm_id: id,
                 vm_name: new_container.name,
-                vm_username: new_container.username,
-                vm_password: new_container.password
             });
         })
         .catch((error) => {
-
             res.status(500).json({
                 status: "error",
                 message: error.message

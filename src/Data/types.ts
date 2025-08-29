@@ -1,9 +1,7 @@
 import { Document,Model } from 'mongoose';
 type user_container_type={
   name:string,
-  username:string,
-  password:string,
-  ports: number[]
+  image:string,
 }
 interface model_type extends Document {
     id: string,
