@@ -17,13 +17,14 @@ export default function creat_container(req: Request, res: Response) {
 
     Services.create_container(new_container)
         .then(async (id) => {
-            return await Services.start_container(req.body.user_id, id).then(() => id);
+            return await Services.start_container(id).then(() => id);
         })
         .then((id) => {
             res.send({
                 status: "ok",
-                vm_id: id,
-                vm_name: new_container.name,
+                id: id,
+                name: new_container.name,
+                url:`https://${new_container.name}.Skybox.${process.env.HOST}`
             });
         })
         .catch((error) => {

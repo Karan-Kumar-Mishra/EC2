@@ -11,17 +11,12 @@ export default async function init() {
 
     await remove_network('hoststream-network');
     await createNetwork();
-
-
-    let a: boolean = await checkDockerImageExists('karankumarmishra/wssh:latest');
     let b: boolean = await checkDockerImageExists('traefik');
-    if (a && b) {
+    if (b == true) {
         console.log("images exist ready for container deployment ")
     }
     else {
-        await pull_image('karankumarmishra/wssh:latest');
         await pull_image('traefik');
-        await pull_image('karankumarmishra/wssh');
         console.log("images pullImage ready for container deployment ")
     }
 

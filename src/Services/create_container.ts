@@ -8,13 +8,8 @@ export default async function create_container(new_container_info: user_containe
 
     const labels: { [label: string]: string } = {
         'traefik.enable': 'true',
-        // Router configuration
         [`traefik.http.routers.${new_container_info.name}.entrypoints`]: 'hoststream-network',
-        
-        // Service configuration
         [`traefik.http.services.${new_container_info.name}.loadbalancer.server.port`]: '80',
-        
-   
     };
 
     const container = await docker.createContainer({
@@ -24,10 +19,6 @@ export default async function create_container(new_container_info: user_containe
             NetworkMode: 'hoststream-network'
         },
         Labels: labels,
-        // Env: [
-        //     `SSH_USERNAME=${new_container_info.username || 'user'}`,
-        //     `SSH_PASSWORD=${new_container_info.password || "1234"}`,
-        // ]
     });
     return container.id;
 }

@@ -9,7 +9,7 @@ entryPoints:
 providers:
   docker:
     exposedByDefault: false
-    defaultRule: "Host(`{{ trimPrefix `/` .Name }}.hoststream.localhost`)"
+    defaultRule: "Host(`{{ trimPrefix `/` .Name }}.Skybox.localhost`)"
     network: hoststream-network  # Important for container communication
 
 # API and dashboard configuration
